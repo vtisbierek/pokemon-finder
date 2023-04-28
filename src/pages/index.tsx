@@ -2,84 +2,78 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import axios from 'axios';
 import {useState} from "react";
-import {Pokemon} from "../typings/pokemon";
-import {Chart as ChartJS, LineElement, PointElement, Tooltip, Legend, RadialLinearScale, Filler} from "chart.js";
-import {Radar} from "react-chartjs-2";
-import {colorScheme} from "../color-scheme";
+import {Pokemon} from "../typings/pokemon-API";
+import {colorSchemes, statNames} from "../constants";
+import _ from "lodash";
+import {PokemonData, PageStyle} from "../typings/custom";
+import Portrait from '@/components/Portrait';
+import StatsGraph from '@/components/StatsGraph';
+import SearchBar from '@/components/SearchBar';
 
 export default function Home() {
-  const [inputText, setInputText] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [pokemon, setPokemon] = useState<Pokemon>();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>){
     e.preventDefault();
 
     await axios.post("/api/pokeapi", {
-      pokemon: inputText,
+      pokemon: searchText,
     })
     .then((response) => {
       setPokemon(response.data);
-      setInputText("");
+      setSearchText("");
     }, (error) => {
       console.log(error);
     });
   }
 
-  ChartJS.register(
-    LineElement,
-    PointElement,
-    Tooltip,
-    Legend,
-    RadialLinearScale,
-    Filler
-  );
+  let pokemonData = {} as PokemonData;
+  let pageStyling = {} as PageStyle;
+  
+  if(pokemon){
+    pokemonData = {
+      name: _.capitalize(pokemon.name),
+      image: `/images/${pokemon?.id}.png`,
+      types: pokemon?.types.map(type => type.type.name),
+      stats: pokemon?.stats.map(stat => stat.base_stat),
+    };
 
-  const pokemonTypes = pokemon?.types.map(type => type.type.name) || "normal";
-
-  const data = {
-    labels: pokemon?.stats.map(stat => stat.stat.name),
-    datasets: [{
-      label: "Base Stats",
-      data: pokemon?.stats.map(stat => stat.base_stat),
-      backgroundColor: colorScheme[pokemonTypes[0] as keyof typeof colorScheme].background,
-      borderColor: colorScheme[pokemonTypes[0] as keyof typeof colorScheme].border,
-    }]
+    pageStyling = {
+      background: colorSchemes[pokemonData.types[0] as keyof typeof colorSchemes].background,
+      border: colorSchemes[pokemonData.types[0] as keyof typeof colorSchemes].border,
+      statNames: statNames,
+    };
   }
 
-  const options = {}
-  const imageSrc = `/images/${pokemon?.id}.png`;
+  let body = `${styles.container}`;
+  //body = body + ` ${styles.fire}`;
+
+  function getSearch(output: string){
+    setSearchText(output);
+  }
 
   return (
     <>
       <Head>
         <title>PokeAPI Viewer</title>
       </Head>
-      <main className={styles.container}>
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder='What pokémon are you looking for?' value={inputText} onChange={(e) => setInputText(e.currentTarget.value)}/>
-          <button type="submit">FIND POKÉMON</button>
-        </form>
+      <main className={body}>
+        <SearchBar output={getSearch} feedback={searchText}/>
         {pokemon && 
           <div className={styles.pokemonData}>
-            <h1>{pokemon?.name}</h1>
-            <div className={styles.stats}>
-              <ul>
-                {pokemon?.stats.map(stat => (
-                  <li>{stat.stat.name}: {stat.base_stat}</li>
-                ))}
-              </ul>
-            </div>
             <div className={styles.graph}>
-              <Radar
-                data={data}
-                options={options}
+              <StatsGraph
+                pokeData={pokemonData}
+                pageStyle={pageStyling}
               />
             </div>
             <div className={styles.card}>
-              <img src={imageSrc} alt={pokemon.name} className={styles.defaultImg}/>
+              <img src={pokemonData.image} alt={pokemon.name} className={styles.defaultImg}/>
             </div>
           </div>
         }
+        <Portrait />
       </main>
     </>
   )

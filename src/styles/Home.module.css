@@ -1,4 +1,13 @@
+.container{
+  background-color: rgb(13, 15, 31);
+  height: 100vh;
+}
+
 .graph{
   width: 500px;
   height: 500px;
+}
+
+.fire{
+  background-color: rgba(241, 63, 63, 1);
 }
