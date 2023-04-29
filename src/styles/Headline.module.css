@@ -17,6 +17,10 @@
     align-items: center;
 }
 
+.container .frame .content{
+    cursor: pointer;
+}
+
 .container .frame .content h1{
     color: #fff;
     font-family: 'Poppins', sans-serif;

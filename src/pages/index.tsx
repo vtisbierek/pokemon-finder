@@ -3,7 +3,7 @@ import styles from '@/styles/Home.module.css'
 import axios from 'axios';
 import {useState} from "react";
 import {Pokemon} from "../typings/pokemon-API";
-import {colorSchemes, statNames} from "../constants";
+import {colorSchemes, statNames, defaultPoke, defaultStyle} from "../constants";
 import _ from "lodash";
 import {PokemonData, PageStyle} from "../typings/custom";
 import Card from '@/components/Card';
@@ -14,6 +14,7 @@ import Headline from '@/components/Headline';
 export default function Home() {
   const [searchText, setSearchText] = useState("");
   const [pokemon, setPokemon] = useState<Pokemon>();
+  const [graphClasses, setGraphClasses] = useState(`${styles.graph}`);
 
   async function handleSearch(){
     await axios.post("/api/pokeapi", {
@@ -22,13 +23,14 @@ export default function Home() {
     .then((response) => {
       setPokemon(response.data);
       setSearchText("");
+      setGraphClasses(`${styles.graph} ${styles.active}`);
     }, (error) => {
       console.log(error);
     });
   }
 
-  let pokemonData = {} as PokemonData;
-  let pageStyling = {} as PageStyle;
+  let pokemonData = defaultPoke as PokemonData;
+  let pageStyling = defaultStyle as PageStyle;
   
   if(pokemon){
     pokemonData = {
@@ -57,20 +59,21 @@ export default function Home() {
       <main className={styles.container}>
         <Headline />
         <SearchBar output={getSearch} feedback={searchText} trigger={handleSearch}/>
-        {pokemon?.name === "dhjsadkhsakjh" && 
-          <div className={styles.pokemonData}>
-            <div className={styles.graph}>
-              <StatsGraph
-                pokeData={pokemonData}
-                pageStyle={pageStyling}
-              />
-            </div>
+        <div className={styles.panel}>
+          <div className={styles.card}>
+            <Card
+              pokeData={pokemonData}
+              pageStyle={pageStyling}
+            />
           </div>
-        }
-        <Card
-          pokeData={pokemonData}
-          pageStyle={pageStyling}
-        />
+          <div className={graphClasses}>
+            <StatsGraph
+              pokeData={pokemonData}
+              pageStyle={pageStyling}
+            />
+          </div>
+
+        </div>
       </main>
     </>
   )
