@@ -1,3 +1,7 @@
+.container{
+    position: relative;
+}
+
 .search{
     position: relative;
     width: 60px;
@@ -7,8 +11,8 @@
     transition: 0.5s;
     box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
     overflow: hidden;
+    z-index: 100;
 }
-
 
 .search .icon{
     cursor: pointer;
@@ -28,6 +32,47 @@
 
 .search.active{
     width: 360px;
+    box-shadow: none;
+}
+
+.outline{
+    position: absolute;
+    inset: 0;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 60px;
+    z-index: 0;
+}
+
+.outline.active{
+    width: 360px;
+}
+
+.outline.active::before,
+.outline.active::after{
+    content: "";
+    position: absolute;
+    inset: -0.25rem;
+    border-radius: inherit;
+    background: conic-gradient(
+        from var(--gradient-angle),
+        #53e27e,
+        #25d0d6,
+        #176cb1,
+        #25d0d6,
+        #53e27e
+    );
+    animation: rotation 4s linear infinite;
+}
+
+.outline::after{
+    filter: blur(3.5rem);
+}
+
+@keyframes rotation {
+    0% {--gradient-angle: 0deg;}
+    100% {--gradient-angle: 360deg;}
 }
 
 .search .input{

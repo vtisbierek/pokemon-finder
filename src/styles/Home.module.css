@@ -1,9 +1,25 @@
 .container{
+  position: relative;
   background-color: rgb(7, 8, 12);
-/*   background-image: url("../../public/images/background/background.png");
-  background-size: 100%; */
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: url("../../public/images/background/background1.png");
+  background-size: 100% 100%;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0.15;
 }
 
 .graph{
