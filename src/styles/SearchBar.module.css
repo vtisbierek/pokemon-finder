@@ -57,11 +57,13 @@
     border-radius: inherit;
     background: conic-gradient(
         from var(--gradient-angle),
-        #53e27e,
-        #25d0d6,
-        #176cb1,
-        #25d0d6,
-        #53e27e
+        #e42020,
+        #e42020,
+        #2196f3,
+        #1359da,
+        #2196f3,
+        #e42020,
+        #e42020
     );
     animation: rotation 4s linear infinite;
 }
@@ -98,17 +100,20 @@
     padding: 10px 0;
 }
 
-.clear{
+.send{
     cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    right: 20px;
+    width: 60px;
+    height: 60px;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.125rem;
-    color: rgba(0, 0, 0, 0.5);
+}
+
+.send img{
+    width: 45px;
+    height: auto;
 }

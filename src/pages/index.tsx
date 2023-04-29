@@ -14,9 +14,7 @@ export default function Home() {
   const [searchText, setSearchText] = useState("");
   const [pokemon, setPokemon] = useState<Pokemon>();
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>){
-    e.preventDefault();
-
+  async function handleSearch(){  
     await axios.post("/api/pokeapi", {
       pokemon: searchText,
     })
@@ -59,7 +57,7 @@ export default function Home() {
         <title>PokeAPI Viewer</title>
       </Head>
       <main className={body}>
-        <SearchBar output={getSearch} feedback={searchText}/>
+        <SearchBar output={getSearch} feedback={searchText} trigger={handleSearch}/>
         {pokemon && 
           <div className={styles.pokemonData}>
             <div className={styles.graph}>
