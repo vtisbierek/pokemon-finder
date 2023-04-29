@@ -1,13 +1,12 @@
 .container{
-  background-color: rgb(13, 15, 31);
+  background-color: rgb(7, 8, 12);
+/*   background-image: url("../../public/images/background/background.png");
+  background-size: 100%; */
   height: 100vh;
+  width: 100vw;
 }
 
 .graph{
   width: 500px;
   height: 500px;
-}
-
-.fire{
-  background-color: rgba(241, 63, 63, 1);
 }
