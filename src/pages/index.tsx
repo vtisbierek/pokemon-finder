@@ -67,10 +67,12 @@ export default function Home() {
             />
           </div>
           <div className={graphClasses}>
-            <StatsGraph
-              pokeData={pokemonData}
-              pageStyle={pageStyling}
-            />
+            <div>
+              <StatsGraph
+                pokeData={pokemonData}
+                pageStyle={pageStyling}
+              />
+            </div>
           </div>
 
         </div>

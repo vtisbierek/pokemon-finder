@@ -31,6 +31,7 @@
 .panel .graph{
   width: 0;
   height: 450px;
+  overflow: hidden;
 }
 
 .panel .graph.active{
@@ -41,4 +42,8 @@
   -ms-transition: width, 0.5s linear;
   -o-transition: width, 0.5s linear;
   transition: width, 0.5s linear;
+}
+
+.panel .graph div{
+  width: 450px;
 }
