@@ -1,0 +1,34 @@
+.container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 1;
+    margin-bottom: 2.5rem;
+}
+
+.container .frame{
+    position: relative;
+    width: 360px;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .frame .content h1{
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1rem;
+    position: absolute;
+    left: 25%;
+    bottom: -20%;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #1359da;
+}
+
+.container .frame .content img{
+    width: 100%;
+    height: auto;
+}

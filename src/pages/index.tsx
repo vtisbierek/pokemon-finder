@@ -9,6 +9,7 @@ import {PokemonData, PageStyle} from "../typings/custom";
 import Portrait from '@/components/Portrait';
 import StatsGraph from '@/components/StatsGraph';
 import SearchBar from '@/components/SearchBar';
+import Headline from '@/components/Headline';
 
 export default function Home() {
   const [searchText, setSearchText] = useState("");
@@ -44,9 +45,6 @@ export default function Home() {
     };
   }
 
-  let body = `${styles.container}`;
-  //body = body + ` ${styles.fire}`;
-
   function getSearch(output: string){
     setSearchText(output);
   }
@@ -56,7 +54,8 @@ export default function Home() {
       <Head>
         <title>PokeAPI Viewer</title>
       </Head>
-      <main className={body}>
+      <main className={styles.container}>
+        <Headline />
         <SearchBar output={getSearch} feedback={searchText} trigger={handleSearch}/>
         {pokemon && 
           <div className={styles.pokemonData}>
