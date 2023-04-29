@@ -6,7 +6,7 @@ import {Pokemon} from "../typings/pokemon-API";
 import {colorSchemes, statNames} from "../constants";
 import _ from "lodash";
 import {PokemonData, PageStyle} from "../typings/custom";
-import Portrait from '@/components/Portrait';
+import Card from '@/components/Card';
 import StatsGraph from '@/components/StatsGraph';
 import SearchBar from '@/components/SearchBar';
 import Headline from '@/components/Headline';
@@ -15,7 +15,7 @@ export default function Home() {
   const [searchText, setSearchText] = useState("");
   const [pokemon, setPokemon] = useState<Pokemon>();
 
-  async function handleSearch(){  
+  async function handleSearch(){
     await axios.post("/api/pokeapi", {
       pokemon: searchText,
     })
@@ -32,7 +32,7 @@ export default function Home() {
   
   if(pokemon){
     pokemonData = {
-      name: _.capitalize(pokemon.name),
+      name: _.upperCase(pokemon.name),
       image: `/images/${pokemon?.id}.png`,
       types: pokemon?.types.map(type => type.type.name),
       stats: pokemon?.stats.map(stat => stat.base_stat),
@@ -57,7 +57,7 @@ export default function Home() {
       <main className={styles.container}>
         <Headline />
         <SearchBar output={getSearch} feedback={searchText} trigger={handleSearch}/>
-        {pokemon && 
+        {pokemon?.name === "dhjsadkhsakjh" && 
           <div className={styles.pokemonData}>
             <div className={styles.graph}>
               <StatsGraph
@@ -65,12 +65,12 @@ export default function Home() {
                 pageStyle={pageStyling}
               />
             </div>
-            <div className={styles.card}>
-              <img src={pokemonData.image} alt={pokemon.name} className={styles.defaultImg}/>
-            </div>
           </div>
         }
-        <Portrait />
+        <Card
+          pokeData={pokemonData}
+          pageStyle={pageStyling}
+        />
       </main>
     </>
   )
