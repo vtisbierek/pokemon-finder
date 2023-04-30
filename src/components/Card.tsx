@@ -1,74 +1,38 @@
 import styles from "../styles/Card.module.css";
 import {PokemonData, PageStyle} from "../typings/custom";
 import styled from "styled-components";
+import {useState} from "react";
+import {Div} from "../styles/Card";
 
 interface CardProps{
     pokeData: PokemonData;
     pageStyle: PageStyle;
 }
 
-const Div = styled("div")<{bgColor1: string, bgColor2: string}>`
-&{
-    position: relative;
-    width: 400px;
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px 30px;
-    transition: 0.5s;
-}
-
-&::before{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50px;
-    width: 50%;
-    height: 100%;
-    background: #fff;
-    border-radius: 8px;
-    transform: skewX(15deg);
-    transition: 0.5s;
-}
-
-&::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50px;
-    width: 50%;
-    height: 100%;
-    background-color: #fff;
-    border-radius: 8px;
-    transform: skewX(15deg);
-    transition: 0.5s;
-    filter: blur(30px);
-    transition: 0.5s;
-}
-
-&:hover::after,
-&:hover:before{
-    transform: skewX(0deg);
-    left: 20px;
-    width: calc(100% - 90px);
-}
-
-&::after,
-&::before{
-    background: linear-gradient(315deg, ${props => props.bgColor2}, ${props => props.bgColor1});
-}
-`;
-
 export default function Card({pokeData, pageStyle}: CardProps){    
+    const [rotateClass, setRotateClass] = useState(false);
+
     return (
         <div className={styles.container}>
             <Div className={styles.box} bgColor1={pageStyle.background} bgColor2={pageStyle.border}>
-                <span></span>
+                {pokeData.name && (
+                    <span className={styles.floatTop} onClick={() => setRotateClass(!rotateClass)}></span>
+                )}
                 <div className={styles.content}>
-                    <img src={pokeData.image} alt={pokeData.name}/>
-                    <h2>{pokeData.name}</h2>
-                    <p>Pokemon facts</p>
+                    <div className={styles.flipBox}>
+                        <div className={rotateClass ? styles.rotate : ""}>
+                            <img src={pokeData.image} alt={pokeData.name}/>
+                        </div>
+                        <div className={!rotateClass ? styles.rotate : ""}>
+                            <img src={pokeData.shiny} alt={pokeData.name}/>
+                        </div>
+                    </div>
+                    {pokeData.name && (
+                        <div className={styles.text}>
+                            <h2>{pokeData.name} <span>#{pokeData.number}</span></h2>
+                            <p>Altura: {pokeData.height} | Peso: {pokeData.weigth}</p>
+                        </div>
+                    )}
                 </div>
             </Div>
         </div>

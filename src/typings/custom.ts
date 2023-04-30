@@ -1,6 +1,10 @@
 export interface PokemonData{
     name: string;
+    number: number;
     image: string;
+    shiny: string;
+    height: string;
+    weigth: string;
     types: string[];
     stats: number[];
 }

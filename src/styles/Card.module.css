@@ -6,7 +6,7 @@
     padding: 40px 0;
 }
 
-.container .box span{
+.container .box span.floatTop{
     display: block;
     position: absolute;
     top: 0;
@@ -14,10 +14,10 @@
     right: 0;
     bottom: 0;
     z-index: 50;
-    pointer-events: none;
+/*     pointer-events: none; */
 }
 
-.container .box span::before{
+.container .box span.floatTop::before{
     content: "";
     position: absolute;
     top: 0;
@@ -33,7 +33,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.container .box:hover span::before{
+.container .box:hover span.floatTop::before{
     top: -50px;
     left: 50px;
     width: 100px;
@@ -41,7 +41,7 @@
     opacity: 1;
 }
 
-.container .box span::after{
+.container .box span.floatTop::after{
     content: "";
     position: absolute;
     bottom: 0;
@@ -58,7 +58,7 @@
     animation-delay: -1s;
 }
 
-.container .box:hover span::after{
+.container .box:hover span.floatTop::after{
     bottom: -50px;
     right: 50px;
     width: 100px;
@@ -77,12 +77,15 @@
 
 .container .box .content{
     position: relative;
+
+    height: 100%;
+    width: 100%;
+
     left: 0;
     padding: 20px 40px;
     background: rgba(255, 255, 255, 0.0);
     box-shadow: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-
     z-index: 100;
     transform: 0.5s;
     color: #fff;
@@ -91,4 +94,36 @@
 
 .container .box:hover .content{
     left: -25px;
+}
+
+.container .box .content .flipBox{
+    height: 100%;
+    width: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.container .box .content .flipBox div{
+    position: absolute;
+    left: -50px;
+    bottom: -30px;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+.rotate{
+    transform: rotateY(180deg);
+}
+
+.container .box .content .text{
+    position: absolute;
+    bottom: -60px;
+    left: 30px;
+}
+
+.container .box .content .text span,
+.container .box .content .text p{
+    font-size: 1rem;
+    opacity: 0.5;
+    font-weight: 400;
 }

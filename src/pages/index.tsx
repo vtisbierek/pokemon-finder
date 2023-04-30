@@ -35,7 +35,11 @@ export default function Home() {
   if(pokemon){
     pokemonData = {
       name: _.upperCase(pokemon.name),
+      number: pokemon.id,
       image: `/images/${pokemon?.id}.png`,
+      shiny: `/images/shiny/${pokemon?.id}.png`,
+      height: (pokemon.height * 10) / 100 + "m",
+      weigth: pokemon.weight / 10 + "kg", 
       types: pokemon?.types.map(type => type.type.name),
       stats: pokemon?.stats.map(stat => stat.base_stat),
     };
