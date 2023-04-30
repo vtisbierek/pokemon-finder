@@ -60,10 +60,7 @@ const Div = styled("div")<{bgColor1: string, bgColor2: string}>`
 }
 `;
 
-export default function Card({pokeData, pageStyle}: CardProps){
-
-    console.log(pageStyle);
-    
+export default function Card({pokeData, pageStyle}: CardProps){    
     return (
         <div className={styles.container}>
             <Div className={styles.box} bgColor1={pageStyle.background} bgColor2={pageStyle.border}>

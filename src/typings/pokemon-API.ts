@@ -1,4 +1,4 @@
-import {NamedAPIResource, VersionGameIndex} from "./common";
+import {NamedAPIResource, VersionGameIndex} from "./common-API";
 
 export interface PokemonSprites {
     /** The default depiction of this Pokémon from the front in battle */

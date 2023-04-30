@@ -20,7 +20,7 @@ export default function Home() {
     await axios.post("/api/pokeapi", {
       pokemon: searchText,
     })
-    .then((response) => {
+    .then((response) => {     
       setPokemon(response.data);
       setSearchText("");
       setGraphClasses(`${styles.graph} ${styles.active}`);
@@ -74,7 +74,6 @@ export default function Home() {
               />
             </div>
           </div>
-
         </div>
       </main>
     </>
