@@ -17,39 +17,6 @@
 /*     pointer-events: none; */
 }
 
-.container .box span.floatTop::before{
-    cursor: pointer;
-    content: "SWITCH SHINY";
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.75rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 8px;
-    border-radius: 50%;
-    background: rgba(35, 109, 247, 0.1);
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    transition: 0.5s;
-    animation: animate 2s ease-in-out infinite;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.container .box:hover span.floatTop::before{
-    top: -50px;
-    left: 50px;
-    width: 80px;
-    height: 80px;
-    opacity: 1;
-}
-
 .container .box span.floatTop::after{
     content: "";
     position: absolute;
@@ -75,21 +42,10 @@
     opacity: 1;
 }
 
-@keyframes animate {
-    0%, 100%{
-        transform: translateY(10px);
-    }
-    50%{
-        transform: translateY(-10px);
-    }
-}
-
 .container .box .content{
     position: relative;
-
     height: 100%;
     width: 100%;
-
     left: 0;
     padding: 20px 40px;
     background: rgba(255, 255, 255, 0.0);

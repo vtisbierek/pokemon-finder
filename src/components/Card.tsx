@@ -1,7 +1,7 @@
 import styles from "../styles/Card.module.css";
 import {PokemonData, PageStyle} from "../typings/custom";
-import {useState} from "react";
-import {Div} from "../styles/Card";
+import {useState, useEffect} from "react";
+import {Div, Span, Types} from "../styles/Card";
 
 interface CardProps{
     pokeData: PokemonData;
@@ -10,12 +10,24 @@ interface CardProps{
 
 export default function Card({pokeData, pageStyle}: CardProps){    
     const [rotateClass, setRotateClass] = useState(false);
+    const [appearance, setAppearance] = useState("'SWITCH SHINY'");
+
+    useEffect(() => {
+        if(rotateClass){
+            setAppearance("'SWITCH NORMAL'");
+        } else{
+            setAppearance("'SWITCH SHINY'");
+        }
+    }, [rotateClass]);
 
     return (
         <div className={styles.container}>
             <Div className={styles.box} bgColor1={pageStyle.background} bgColor2={pageStyle.border}>
                 {pokeData.name && (
-                    <span className={styles.floatTop} onClick={() => setRotateClass(!rotateClass)}></span>
+                    <>
+                        <Span appearance={appearance} onClick={() => setRotateClass(!rotateClass)}></Span>
+                        <Types data-content={<img src="https://img.shields.io/badge/FIRE-red?logo=pokemon&style=for-the-badge" alt="type bagdes" />}></Types>
+                    </>
                 )}
                 <div className={styles.content}>
                     <div className={styles.flipBox}>

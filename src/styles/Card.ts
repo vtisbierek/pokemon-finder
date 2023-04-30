@@ -52,3 +52,92 @@ export const Div = styled("div")<{bgColor1: string, bgColor2: string}>`
         background: linear-gradient(315deg, ${props => props.bgColor2}, ${props => props.bgColor1});
     }
 `;
+
+export const Span = styled("span")<{appearance: string}>`
+    &{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 50;
+    }
+
+    &::before{
+        cursor: pointer;
+        content: ${props => props.appearance};
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.75rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 8px;
+        border-radius: 50%;
+        background: rgba(35, 109, 247, 0.1);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: 0.5s;
+        animation: animate 2s ease-in-out infinite;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    ${Div}:hover &::before{
+        top: -50px;
+        left: 50px;
+        width: 80px;
+        height: 80px;
+        opacity: 1;
+    }
+`;
+
+export const Types = styled("span")`
+    &{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 50;
+    }
+
+    &::before{
+        content: attr(data-content);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.75rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        border: 8px;
+        border-radius: 50%;
+        background: rgba(35, 109, 247, 0.1);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        transition: 0.5s;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    ${Div}:hover &::before{
+        bottom: -50px;
+        right: 50px;
+        width: 80px;
+        height: 80px;
+        opacity: 1;
+    }
+`;
+
