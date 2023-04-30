@@ -61,8 +61,8 @@ export default function StatsGraph({pokeData, pageStyle}: GraphProps){
                 },
                 ticks: {
                     /* conforme https://www.chartjs.org/docs/latest/axes/styling.html#tick-configuration */
-                    stepSize: 40,
-                    maxTicksLimit: 0, 
+                    stepSize: 60,
+                    maxTicksLimit: 10, 
                     display: false,
                 },
             }

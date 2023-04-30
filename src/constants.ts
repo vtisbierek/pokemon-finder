@@ -91,7 +91,8 @@ export const statNames = [
 ];
 
 export const defaultPoke = {
-  image: "/images/others/question.png"
+  image: "/images/others/question.png",
+  types: [""],
 }
 
 export const defaultStyle = {
