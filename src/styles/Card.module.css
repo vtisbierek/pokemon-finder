@@ -18,14 +18,23 @@
 }
 
 .container .box span.floatTop::before{
-    content: "";
+    cursor: pointer;
+    content: "SWITCH SHINY";
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     border: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    background: rgba(35, 109, 247, 0.1);
     backdrop-filter: blur(10px);
     opacity: 0;
     transition: 0.5s;
@@ -36,8 +45,8 @@
 .container .box:hover span.floatTop::before{
     top: -50px;
     left: 50px;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     opacity: 1;
 }
 
@@ -105,7 +114,7 @@
 
 .container .box .content .flipBox div{
     position: absolute;
-    left: -50px;
+    left: -70px;
     bottom: -30px;
     -webkit-backface-visibility: hidden; /* Safari */
     backface-visibility: hidden;
@@ -117,7 +126,7 @@
 
 .container .box .content .text{
     position: absolute;
-    bottom: -60px;
+    bottom: -40px;
     left: 30px;
 }
 

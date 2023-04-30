@@ -1,6 +1,5 @@
 import styles from "../styles/Card.module.css";
 import {PokemonData, PageStyle} from "../typings/custom";
-import styled from "styled-components";
 import {useState} from "react";
 import {Div} from "../styles/Card";
 
