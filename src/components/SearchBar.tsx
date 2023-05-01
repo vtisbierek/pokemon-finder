@@ -28,6 +28,12 @@ export default function SearchBar({output, feedback, trigger}: BarProps){
         output(inputText);
     }, [inputText]);
 
+    useEffect(() => {
+        if(!feedback){
+            setInputText("");
+        }
+    }, [feedback]);
+
     function handleTrigger(event: React.KeyboardEvent<HTMLInputElement>){
         if (event.key === "Enter"){
             trigger();
@@ -44,7 +50,7 @@ export default function SearchBar({output, feedback, trigger}: BarProps){
                     <input
                         type="text"
                         placeholder="Digite o Pokémon"
-                        value={feedback}
+                        value={inputText}
                         onChange={(e) => setInputText(e.currentTarget.value)} 
                         onKeyDown={handleTrigger}
                     />
