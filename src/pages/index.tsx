@@ -29,9 +29,7 @@ export default function Home() {
         weight: pokemon?.weight as number / 10 + "kg", 
         types: pokemon?.types.map(type => type.type.name) as string[],
         stats: pokemon?.stats.map(stat => stat.base_stat) as number[],
-      });
-      console.log("dentro do useeffect " + pokeData.types.length);
-      
+      });      
     }
   }, [pokemon]);
 

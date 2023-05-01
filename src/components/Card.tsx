@@ -20,10 +20,6 @@ export default function Card({pokeData, pageStyle}: CardProps){
         }
     }, [rotateClass]);
    
-    const placement = pokeData.types.length * 50 + 20 + "px";
-    console.log("placement " + placement + " pokeData.types.length " + pokeData.types.length);
-    
-
     return (
         <div className={styles.container}>
             <Div className={styles.box} bgColor1={pageStyle.background} bgColor2={pageStyle.border}>
@@ -33,7 +29,7 @@ export default function Card({pokeData, pageStyle}: CardProps){
                         <Types
                             imageUrl1={`/images/types/${pokeData.types[0]}.png`} 
                             imageUrl2={`/images/types/${pokeData.types[1]}.png`}
-                            position={placement}
+                            className={`${pokeData.types.length > 1 ? "long" : ""}`}
                             types={pokeData.types.length}
                         ></Types>
                     </>
