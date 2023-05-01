@@ -98,7 +98,7 @@ export const Span = styled("span")<{appearance: string}>`
     }
 `;
 
-export const Types = styled("span")<{imageUrl1: string, imageUrl2: string, types: number}>`
+export const Types = styled("span")<{imageUrl1: string, imageUrl2: string, types: number, position: string}>`
     &{
         display: block;
         position: absolute;
@@ -150,12 +150,11 @@ export const Types = styled("span")<{imageUrl1: string, imageUrl2: string, types
     }
 
     ${Div}:hover &::before{
-        right: ${props => props.types > 1 ? "120px" : "70px"};
+        right: ${props => props.position};
     }
 
     ${Div}:hover &::after{
         right: 40px;
     }
-
 `;
 

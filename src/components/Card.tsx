@@ -19,6 +19,10 @@ export default function Card({pokeData, pageStyle}: CardProps){
             setAppearance("'SWITCH SHINY'");
         }
     }, [rotateClass]);
+   
+    const placement = pokeData.types.length * 50 + 20 + "px";
+    console.log("placement " + placement + " pokeData.types.length " + pokeData.types.length);
+    
 
     return (
         <div className={styles.container}>
@@ -26,9 +30,10 @@ export default function Card({pokeData, pageStyle}: CardProps){
                 {pokeData.name && (
                     <>
                         <Span appearance={appearance} onClick={() => setRotateClass(!rotateClass)}></Span>
-                        <Types 
+                        <Types
                             imageUrl1={`/images/types/${pokeData.types[0]}.png`} 
-                            imageUrl2={`/images/types/${pokeData.types[1]}.png`} 
+                            imageUrl2={`/images/types/${pokeData.types[1]}.png`}
+                            position={placement}
                             types={pokeData.types.length}
                         ></Types>
                     </>
@@ -45,7 +50,7 @@ export default function Card({pokeData, pageStyle}: CardProps){
                     {pokeData.name && (
                         <div className={styles.text}>
                             <h2>{pokeData.name} <span>#{pokeData.number}</span></h2>
-                            <p>Altura: {pokeData.height} | Peso: {pokeData.weigth}</p>
+                            <p>Altura: {pokeData.height} | Peso: {pokeData.weight}</p>
                         </div>
                     )}
                 </div>

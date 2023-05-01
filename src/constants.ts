@@ -91,8 +91,14 @@ export const statNames = [
 ];
 
 export const defaultPoke = {
+  name: "",
+  number: 0,
   image: "/images/others/question.png",
-  types: [""],
+  shiny: "/images/others/question.png",
+  height: "",
+  weight: "",
+  types: ["unknown"],
+  stats: [0, 0, 0, 0, 0, 0]
 }
 
 export const defaultStyle = {
@@ -100,4 +106,13 @@ export const defaultStyle = {
   border: "rgba(33, 150, 243, 1)",
 }
     
-  
+export interface PokemonData{
+  name: string;
+  number: number;
+  image: string;
+  shiny?: string;
+  height: string;
+  weight: string;
+  types: string[];
+  stats: number[];
+}

@@ -4,7 +4,7 @@ export interface PokemonData{
     image: string;
     shiny: string;
     height: string;
-    weigth: string;
+    weight: string;
     types: string[];
     stats: number[];
 }
@@ -12,5 +12,4 @@ export interface PokemonData{
 export interface PageStyle{
     background: string;
     border: string;
-    statNames: string[]; 
 }

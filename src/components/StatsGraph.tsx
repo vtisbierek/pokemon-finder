@@ -2,6 +2,7 @@ import {Chart as ChartJS, LineElement, PointElement, Tooltip, Legend, RadialLine
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {Radar} from "react-chartjs-2";
 import {PokemonData, PageStyle} from "../typings/custom";
+import {statNames} from "../constants";
 
 interface GraphProps{
     pokeData: PokemonData;
@@ -20,7 +21,7 @@ export default function StatsGraph({pokeData, pageStyle}: GraphProps){
     );
 
     const graphData = {
-        labels: pageStyle.statNames,
+        labels: statNames,
         datasets: [{
             data: pokeData.stats,
             backgroundColor: pageStyle.background,

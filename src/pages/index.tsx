@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import axios from 'axios';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Pokemon} from "../typings/pokemon-API";
-import {colorSchemes, statNames, defaultPoke, defaultStyle} from "../constants";
+import {colorSchemes, defaultPoke, defaultStyle} from "../constants";
 import _ from "lodash";
 import {PokemonData, PageStyle} from "../typings/custom";
 import Card from '@/components/Card';
@@ -15,6 +15,34 @@ export default function Home() {
   const [searchText, setSearchText] = useState("");
   const [pokemon, setPokemon] = useState<Pokemon>();
   const [graphClasses, setGraphClasses] = useState(`${styles.graph}`);
+  const [pokeData, setPokeData] = useState<PokemonData>(defaultPoke);
+  const [pageStyle, setPageStyle] = useState<PageStyle>(defaultStyle);
+
+  useEffect(() => {
+    if(pokemon){
+      setPokeData({
+        name: _.upperCase(pokemon?.name),
+        number: pokemon?.id as number,
+        image: `/images/${pokemon?.id}.png`,
+        shiny: `/images/shiny/${pokemon?.id}.png`,
+        height: (pokemon?.height as number * 10) / 100 + "m",
+        weight: pokemon?.weight as number / 10 + "kg", 
+        types: pokemon?.types.map(type => type.type.name) as string[],
+        stats: pokemon?.stats.map(stat => stat.base_stat) as number[],
+      });
+      console.log("dentro do useeffect " + pokeData.types.length);
+      
+    }
+  }, [pokemon]);
+
+  useEffect(() => {
+    if(pokemon){
+      setPageStyle({
+        background: colorSchemes[pokeData?.types[0] as keyof typeof colorSchemes].background,
+        border: colorSchemes[pokeData?.types[0] as keyof typeof colorSchemes].border,
+      });
+    }
+  }, [pokeData]);
 
   async function handleSearch(){
     await axios.post("/api/pokeapi", {
@@ -27,28 +55,6 @@ export default function Home() {
     }, (error) => {
       console.log(error);
     });
-  }
-
-  let pokemonData = defaultPoke as PokemonData;
-  let pageStyling = defaultStyle as PageStyle;
-  
-  if(pokemon){
-    pokemonData = {
-      name: _.upperCase(pokemon.name),
-      number: pokemon.id,
-      image: `/images/${pokemon?.id}.png`,
-      shiny: `/images/shiny/${pokemon?.id}.png`,
-      height: (pokemon.height * 10) / 100 + "m",
-      weigth: pokemon.weight / 10 + "kg", 
-      types: pokemon?.types.map(type => type.type.name),
-      stats: pokemon?.stats.map(stat => stat.base_stat),
-    };
-
-    pageStyling = {
-      background: colorSchemes[pokemonData.types[0] as keyof typeof colorSchemes].background,
-      border: colorSchemes[pokemonData.types[0] as keyof typeof colorSchemes].border,
-      statNames: statNames,
-    };
   }
 
   function getSearch(output: string){
@@ -66,15 +72,15 @@ export default function Home() {
         <div className={styles.panel}>
           <div className={styles.card}>
             <Card
-              pokeData={pokemonData}
-              pageStyle={pageStyling}
+              pokeData={pokeData}
+              pageStyle={pageStyle} 
             />
           </div>
           <div className={graphClasses}>
             <div>
               <StatsGraph
-                pokeData={pokemonData}
-                pageStyle={pageStyling}
+                pokeData={pokeData}
+                pageStyle={pageStyle}
               />
             </div>
           </div>
