@@ -19,6 +19,7 @@
     transform: 0.5s;
     color: #fff;
     font-family: 'Poppins', sans-serif;
+    transition: all 0.5s;
 }
 
 .container .box:hover .content{
