@@ -39,19 +39,24 @@ export default function Card({pokeData, pageStyle}: CardProps){
                     </>
                 )}
                 <div className={styles.content}>
-                    <div className={styles.flipBox}>
-                        <div className={rotateClass ? styles.rotate : ""}>
-                            <img src={pokeData.image} alt={pokeData.name}/>
-                        </div>
-                        <div className={!rotateClass ? styles.rotate : ""}>
-                            <img src={pokeData.shiny} alt={pokeData.name}/>
-                        </div>
-                    </div>
                     {pokeData.name && (
-                        <div className={styles.text}>
-                            <h2>{pokeData.name} <span>#{pokeData.number}</span></h2>
-                            <p>Altura: {pokeData.height} | Peso: {pokeData.weight}</p>
-                        </div>
+                        <>
+                            <div className={styles.flipBox}>
+                                <div className={rotateClass ? styles.rotate : ""}>
+                                    <img src={pokeData.image} alt={pokeData.name}/>
+                                </div>
+                                <div className={!rotateClass ? styles.rotate : ""}>
+                                    <img src={pokeData.shiny} alt={pokeData.name}/>
+                                </div>
+                            </div>
+                            <div className={styles.text}>
+                                <h2>{pokeData.name} <span>#{pokeData.number}</span></h2>
+                                <p>Altura: {pokeData.height} | Peso: {pokeData.weight}</p>
+                            </div>
+                        </>
+                    )}
+                    {!pokeData.name && (
+                        <img src={pokeData.image} alt="quem é esse pokémon?" className={styles.question}/>
                     )}
                 </div>
             </Div>

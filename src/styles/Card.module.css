@@ -56,3 +56,8 @@
     opacity: 0.5;
     font-weight: 400;
 }
+
+.container .box .content .question{
+    margin-top: 3rem;
+    margin-left: 3rem;
+}
