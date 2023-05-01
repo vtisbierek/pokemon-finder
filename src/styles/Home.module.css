@@ -26,6 +26,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 1100px;
 }
 
 .panel .graph{
@@ -47,3 +48,14 @@
 .panel .graph div{
   width: 450px;
 }
+
+@media screen and (max-width: 1100px) {
+  .panel{
+    flex-direction: column;
+  }
+
+  .panel .graph.active{
+    margin: 0;
+  } 
+
+} 
