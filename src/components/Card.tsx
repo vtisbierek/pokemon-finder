@@ -19,6 +19,10 @@ export default function Card({pokeData, pageStyle}: CardProps){
             setAppearance("'SWITCH SHINY'");
         }
     }, [rotateClass]);
+
+    const numOfTypes = pokeData.types.length;
+    const imageUrl1 = `/images/types/${pokeData.types[0]}.png`;
+    const imageUrl2 = numOfTypes > 1 ? `/images/types/${pokeData.types[1]}.png` : `/images/types/${pokeData.types[0]}.png`;
    
     return (
         <div className={styles.container}>
@@ -27,10 +31,10 @@ export default function Card({pokeData, pageStyle}: CardProps){
                     <>
                         <Span appearance={appearance} onClick={() => setRotateClass(!rotateClass)}></Span>
                         <Types
-                            imageUrl1={`/images/types/${pokeData.types[0]}.png`} 
-                            imageUrl2={`/images/types/${pokeData.types[1]}.png`}
-                            className={`${pokeData.types.length > 1 ? "long" : ""}`}
-                            types={pokeData.types.length}
+                            imageUrl1={imageUrl1} 
+                            imageUrl2={imageUrl2}
+                            className={`${numOfTypes > 1 ? "long" : ""}`}
+                            types={numOfTypes}
                         ></Types>
                     </>
                 )}

@@ -150,7 +150,7 @@ export const Types = styled("span")<{imageUrl1: string, imageUrl2: string, types
     }
 
     ${Div}:hover &::before{
-        right: 70px;
+        right: 60px;
     }
 
     ${Div}:hover &.long::before{
