@@ -6,8 +6,6 @@ export default function Document() {
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <link rel="shortcut icon" href="/images/others/pokeball.png" type="image/png" />
       </Head>
       <body>
         <Main />
