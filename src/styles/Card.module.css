@@ -62,3 +62,37 @@
     margin-top: 3rem;
     margin-left: 3rem;
 }
+
+@media screen and (max-width: 550px) {
+    .container{
+        margin-top: 20px;
+    }
+
+    .container .box .content .text{
+        bottom: -35px;
+        left: 20px;
+    }
+
+    .container .box .content .text p{
+        font-size: 0.9rem;
+    }
+
+    .container .box .content .question{
+        margin-top: 2rem;
+        margin-left: 2.5rem;
+    }
+
+    .container .box:hover .content{
+        left: -5px;
+    }
+
+    .container .box .content .flipBox div{
+        left: -50px;
+        bottom: -20px;
+    }
+
+    .container .box .content .flipBox div img{
+        max-width: 375px;
+        height: auto;
+    }
+}

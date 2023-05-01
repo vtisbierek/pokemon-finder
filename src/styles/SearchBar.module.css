@@ -116,3 +116,17 @@
     width: 45px;
     height: auto;
 }
+
+@media screen and (max-width: 550px) {
+    .search.active{
+        width: 300px;
+    }
+
+    .outline.active{
+        width: 300px;
+    }
+
+    .search .input{
+        width: 180px;
+    }
+} 

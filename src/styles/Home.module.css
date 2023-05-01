@@ -54,7 +54,19 @@
     flex-direction: column;
   }
 
+  .panel .graph{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .panel .graph.active{
     margin: 0;
   } 
+} 
+
+@media screen and (max-width: 550px) {
+  .panel .graph div{
+    width: 350px;
+  }
 } 

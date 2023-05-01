@@ -51,6 +51,23 @@ export const Div = styled("div")<{bgColor1: string, bgColor2: string}>`
     &::before{
         background: linear-gradient(315deg, ${props => props.bgColor2}, ${props => props.bgColor1});
     }
+
+    @media screen and (max-width: 550px) {
+        &{
+            width: 350px;
+            height: 390px;
+        }
+
+        &::before,
+        &::after{
+            left: 70px; 
+        }
+
+        &:hover::after,
+        &:hover:before{
+            left: 40px; 
+        }
+    } 
 `;
 
 export const Span = styled("span")<{appearance: string}>`
@@ -95,6 +112,12 @@ export const Span = styled("span")<{appearance: string}>`
         width: 80px;
         height: 80px;
         opacity: 1;
+    }
+
+    @media screen and (max-width: 550px) {
+        ${Div}:hover &::before{
+            top: -40px;
+        }
     }
 `;
 
@@ -159,6 +182,27 @@ export const Types = styled("span")<{imageUrl1: string, imageUrl2: string, types
 
     ${Div}:hover &::after{
         right: 40px;
+    }
+
+    @media screen and (max-width: 550px) {
+        ${Div}:hover &::before,
+        ${Div}:hover &::after{
+            width: 55px;
+            height: 55px;
+            bottom: -30px;
+        }
+
+        ${Div}:hover &::before{
+            right: 40px;
+        }
+
+        ${Div}:hover &.long::before{
+            right: 80px;
+        }
+
+        ${Div}:hover &::after{
+            right: 20px;
+        }
     }
 `;
 
