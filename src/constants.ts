@@ -52,8 +52,8 @@ export const colorSchemes = {
     border: "rgba(0, 0, 0, 1)",
   },
   psychic: {
-    background: "rgba(138, 65, 138, 1)",
-    border: "rgba(97, 45, 97, 1)",
+    background: "rgba(97, 45, 97, 1)",
+    border: "rgba(253, 101, 253, 1)",
   },
   ice: {
     background: "rgba(73, 132, 150, 1)",

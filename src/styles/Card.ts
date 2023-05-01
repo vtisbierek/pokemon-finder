@@ -109,9 +109,9 @@ export const Types = styled("span")<{imageUrl1: string, imageUrl2: string, types
         z-index: 50;
     }
 
-    &::before{
+    &::before,
+    &::after{
         content: "";
-        background-image: url(${props => props.imageUrl1});
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -119,15 +119,11 @@ export const Types = styled("span")<{imageUrl1: string, imageUrl2: string, types
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #fff;
-        font-family: 'Poppins', sans-serif;
-        font-size: 0.75rem;
         position: absolute;
         bottom: 0;
         right: 0;
         width: 100%;
         height: 100%;
-        border: 8px;
         border-radius: 50%;
         backdrop-filter: blur(10px);
         opacity: 0;
@@ -135,47 +131,31 @@ export const Types = styled("span")<{imageUrl1: string, imageUrl2: string, types
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
 
-    ${Div}:hover &::before{
-        bottom: -40px;
-        right: ${props => props.types > 1 ? "120px" : "70px"};
-        width: 70px;
-        height: 70px;
-        opacity: 1;
+    &::before{
+        background-image: url(${props => props.imageUrl1});
+        display: block;
     }
 
     &::after{
-        content: "";
         background-image: url(${props => props.imageUrl2});
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-family: 'Poppins', sans-serif;
-        font-size: 0.75rem;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        border: 8px;
-        border-radius: 50%;
-        backdrop-filter: blur(10px);
-        opacity: 0;
-        transition: 0.5s;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        display: ${props => props.types > 1 ? "flex" : "none"};
+        display: ${props => props.types > 1 ? "block" : "none"};
     }
 
+    ${Div}:hover &::before,
     ${Div}:hover &::after{
         bottom: -40px;
-        right: 40px;
         width: 70px;
         height: 70px;
         opacity: 1;
     }
+
+    ${Div}:hover &::before{
+        right: ${props => props.types > 1 ? "120px" : "70px"};
+    }
+
+    ${Div}:hover &::after{
+        right: 40px;
+    }
+
 `;
 

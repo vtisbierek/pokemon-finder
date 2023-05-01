@@ -20,16 +20,17 @@ export default function Card({pokeData, pageStyle}: CardProps){
         }
     }, [rotateClass]);
 
-    console.log("length " + pokeData.types.length);
-    
-
     return (
         <div className={styles.container}>
             <Div className={styles.box} bgColor1={pageStyle.background} bgColor2={pageStyle.border}>
                 {pokeData.name && (
                     <>
                         <Span appearance={appearance} onClick={() => setRotateClass(!rotateClass)}></Span>
-                        <Types imageUrl1={`/images/types/${pokeData.types[0]}.png`} imageUrl2={`/images/types/${pokeData.types[1]}.png`} types={pokeData.types.length}></Types>
+                        <Types 
+                            imageUrl1={`/images/types/${pokeData.types[0]}.png`} 
+                            imageUrl2={`/images/types/${pokeData.types[1]}.png`} 
+                            types={pokeData.types.length}
+                        ></Types>
                     </>
                 )}
                 <div className={styles.content}>
