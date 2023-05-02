@@ -68,7 +68,9 @@ export default function SearchBar({output, feedback, trigger, disabled}: BarProp
                     />
                 </div>
                 <div className={styles.voice}>
-                    <Microphone transcription={handleVoice} disabled={disabled}/>
+                    {expandedBar && (
+                        <Microphone transcription={handleVoice} disabled={disabled}/>
+                    )}
                 </div>
                 <span className={styles.send} onClick={handleClick}>
                     {

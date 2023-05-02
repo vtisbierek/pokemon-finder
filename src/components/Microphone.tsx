@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import styles from "../styles/Microphone.module.css";
 import {HiMicrophone, HiOutlineMicrophone} from "react-icons/hi";
@@ -17,6 +17,11 @@ export default function Microphone({transcription, disabled}: MicrophoneProps){
   } = useSpeechRecognition();
 
   const startListening = () => SpeechRecognition.startListening({ continuous: true });
+  const [isListening, setIsListening] = useState(false);
+
+  useEffect(() => {
+    setIsListening(listening);
+  }, [listening]);
 
   useEffect(() => {
     if(disabled){
@@ -28,13 +33,13 @@ export default function Microphone({transcription, disabled}: MicrophoneProps){
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
-  if(listening){
+  if(isListening){
     transcription(transcript);
   }
 
   function handleClick(){
     if(!disabled){
-        if(listening){
+        if(isListening){
             SpeechRecognition.stopListening();
         } else{
             resetTranscript();
@@ -47,10 +52,10 @@ export default function Microphone({transcription, disabled}: MicrophoneProps){
     <div className={styles.container}>
         <div className={styles.microphone} onClick={handleClick}>
             {
-                listening ? (
-                    <span className={styles.phoneOn}><HiMicrophone /></span>
+                isListening ? (
+                    <div className={styles.phoneOn}><HiMicrophone /></div>
                 ) : (
-                    <span><HiOutlineMicrophone /></span>
+                    <div><HiOutlineMicrophone /></div>
                 )
             }
         </div>
