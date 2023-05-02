@@ -30,7 +30,7 @@ export default function Microphone({transcription, disabled}: MicrophoneProps){
   }, [disabled]);
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    alert("Browser não tem suporte de voz.");
   }
 
   if(isListening){

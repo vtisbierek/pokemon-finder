@@ -142,4 +142,8 @@
     .search .input{
         width: 180px;
     }
+
+    .search .input input{
+        font-size: 1rem;
+    }
 } 
