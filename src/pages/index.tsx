@@ -10,6 +10,7 @@ import Card from '@/components/Card';
 import StatsGraph from '@/components/StatsGraph';
 import SearchBar from '@/components/SearchBar';
 import Headline from '@/components/Headline';
+import Footer from '@/components/Footer';
 import Modal, {RenderModalBackdropProps} from "react-overlays/Modal";
 import {RiCloseFill} from "react-icons/ri";
 
@@ -64,6 +65,7 @@ export default function Home() {
     setSearchText(output);
   }
 
+  //backdrop utilizado para o modal das mensagens de erro (https://www.npmjs.com/package/react-overlays)
   const renderBackdrop = (props: RenderModalBackdropProps) => <div className={styles.backdrop} {...props} />;
 
   return (
@@ -105,6 +107,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <Footer />
       </main>
     </>
   )
