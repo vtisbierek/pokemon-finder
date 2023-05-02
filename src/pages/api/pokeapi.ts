@@ -32,13 +32,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if(dataValidation(pokemon)){
     pokemon = dataTransformation(pokemon);
     
+    //conforme https://github.com/Gabb-c/pokenode-ts -> wrapper library da PokeAPI para Node.js com tipagem para suporte a Typescript
     await api
     .getPokemonByName(pokemon)
     .then((data) => res.status(200).json(data))
-    .catch((error: AxiosError) => console.log("xis"));
+    .catch((error: AxiosError) => {
+      console.log(error);
+      res.status(error.response?.status!).json("Pokémon não encontrado na Pokédex.");
+    });
   } else {
-    console.log("data validation fail");
+    res.status(400).json("Você deve fornecer um nome ou número de Pokédex de Pokémon.");
   }
-
-
 }

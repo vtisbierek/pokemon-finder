@@ -46,10 +46,10 @@ export default function Home() {
     await axios.post("/api/pokeapi", {
       pokemon: searchText,
     })
-    .then((response) => {     
+    .then((response) => {
       setPokemon(response.data);
       setSearchText("");
-      setGraphClasses(`${styles.graph} ${styles.active}`);
+      setGraphClasses(`${styles.graph} ${styles.active}`);      
     }, (error) => {
       console.log(error);
     });
