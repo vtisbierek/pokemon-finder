@@ -79,7 +79,7 @@
 
 .search .input{
     position: relative;
-    width: 240px;
+    width: 210px;
     height: 60px;
     left: 60px;
     display: flex;
@@ -97,6 +97,19 @@
     border: none;
     outline: none;
     padding: 10px 0;
+}
+
+.voice{
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .send{

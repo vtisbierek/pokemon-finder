@@ -1,6 +1,7 @@
 import styles from "../styles/SearchBar.module.css";
 import {GoSearch} from "react-icons/go";
 import {useState, useEffect} from "react";
+import Microphone from "./Microphone";
 
 interface BarProps{
     output: (category: string) => void;
@@ -47,6 +48,10 @@ export default function SearchBar({output, feedback, trigger, disabled}: BarProp
         }
     }
 
+    function handleVoice(text: string){
+        setInputText(text);
+    }
+
     return (
         <div className={styles.container}>
             <div className={barClasses}>
@@ -61,6 +66,9 @@ export default function SearchBar({output, feedback, trigger, disabled}: BarProp
                         onChange={(e) => setInputText(e.currentTarget.value)} 
                         onKeyDown={handleKeydown}
                     />
+                </div>
+                <div className={styles.voice}>
+                    <Microphone transcription={handleVoice} disabled={disabled}/>
                 </div>
                 <span className={styles.send} onClick={handleClick}>
                     {

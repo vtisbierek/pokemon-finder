@@ -1,0 +1,13 @@
+.microphone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    font-size: 1rem;
+    color: #000;
+}
+
+.phoneOn{
+    color: #2196f3;
+}
