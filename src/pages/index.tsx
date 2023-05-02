@@ -10,6 +10,8 @@ import Card from '@/components/Card';
 import StatsGraph from '@/components/StatsGraph';
 import SearchBar from '@/components/SearchBar';
 import Headline from '@/components/Headline';
+import Modal, {RenderModalBackdropProps} from "react-overlays/Modal";
+import {RiCloseFill} from "react-icons/ri";
 
 export default function Home() {
   const [searchText, setSearchText] = useState("");
@@ -17,6 +19,8 @@ export default function Home() {
   const [graphClasses, setGraphClasses] = useState(`${styles.graph}`);
   const [pokeData, setPokeData] = useState<PokemonData>(defaultPoke);
   const [pageStyle, setPageStyle] = useState<PageStyle>(defaultStyle);
+  const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if(pokemon){
@@ -51,13 +55,16 @@ export default function Home() {
       setSearchText("");
       setGraphClasses(`${styles.graph} ${styles.active}`);      
     }, (error) => {
-      console.log(error);
+      setErrorMessage(error.response.data);
+      setShowModal(true);
     });
   }
 
   function getSearch(output: string){
     setSearchText(output);
   }
+
+  const renderBackdrop = (props: RenderModalBackdropProps) => <div className={styles.backdrop} {...props} />;
 
   return (
     <>
@@ -67,6 +74,19 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className={styles.container}>
+        <Modal
+          className={styles.modal}
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          renderBackdrop={renderBackdrop}
+        >
+          <div>
+            <h1 className={styles.modalMessage}>{errorMessage}</h1>
+            <button onClick={() => setShowModal(false)} className={styles.buttonClose}>
+                <RiCloseFill />
+            </button>
+          </div>
+        </Modal>
         <Headline />
         <SearchBar output={getSearch} feedback={searchText} trigger={handleSearch}/>
         <div className={styles.panel}>
