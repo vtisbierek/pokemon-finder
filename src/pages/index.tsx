@@ -7,7 +7,7 @@ import {colorSchemes, defaultPoke, defaultStyle} from "../constants";
 import _ from "lodash";
 import {PokemonData, PageStyle} from "../typings/custom";
 import Card from '@/components/Card';
-import StatsGraph from '@/components/StatsGraph';
+import Graph from '@/components/Graph';
 import SearchBar from '@/components/SearchBar';
 import Headline from '@/components/Headline';
 import Footer from '@/components/Footer';
@@ -22,6 +22,7 @@ export default function Home() {
   const [pageStyle, setPageStyle] = useState<PageStyle>(defaultStyle);
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [disableSearch, setDisableSearch] = useState(false);
 
   useEffect(() => {
     if(pokemon){
@@ -48,16 +49,20 @@ export default function Home() {
   }, [pokeData]);
 
   async function handleSearch(){
+    setDisableSearch(true);
+
     await axios.post("/api/pokeapi", {
       pokemon: searchText,
     })
     .then((response) => {
       setPokemon(response.data);
       setSearchText("");
-      setGraphClasses(`${styles.graph} ${styles.active}`);      
+      setGraphClasses(`${styles.graph} ${styles.active}`);   
+      setDisableSearch(false);   
     }, (error) => {
       setErrorMessage(error.response.data);
       setShowModal(true);
+      setDisableSearch(false);
     });
   }
 
@@ -90,7 +95,7 @@ export default function Home() {
           </div>
         </Modal>
         <Headline />
-        <SearchBar output={getSearch} feedback={searchText} trigger={handleSearch}/>
+        <SearchBar output={getSearch} feedback={searchText} trigger={handleSearch} disabled={disableSearch}/>
         <div className={styles.panel}>
           <div className={styles.card}>
             <Card
@@ -100,7 +105,7 @@ export default function Home() {
           </div>
           <div className={graphClasses}>
             <div>
-              <StatsGraph
+              <Graph
                 pokeData={pokeData}
                 pageStyle={pageStyle}
               />

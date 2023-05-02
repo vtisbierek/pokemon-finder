@@ -9,7 +9,7 @@ interface GraphProps{
     pageStyle: PageStyle;
 }
 
-export default function StatsGraph({pokeData, pageStyle}: GraphProps){
+export default function Graph({pokeData, pageStyle}: GraphProps){
     ChartJS.register(
         LineElement,
         PointElement,

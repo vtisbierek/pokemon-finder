@@ -6,9 +6,10 @@ interface BarProps{
     output: (category: string) => void;
     feedback: string;
     trigger: () => void;
+    disabled: boolean;
 }
 
-export default function SearchBar({output, feedback, trigger}: BarProps){
+export default function SearchBar({output, feedback, trigger, disabled}: BarProps){
     const [expandedBar, setExpandedBar] = useState(false);
     const [barClasses, setBarClasses] = useState(`${styles.search}`);
     const [outlineClasses, setOutlineClasses] = useState(`${styles.outline}`);
@@ -34,8 +35,14 @@ export default function SearchBar({output, feedback, trigger}: BarProps){
         }
     }, [feedback]);
 
-    function handleTrigger(event: React.KeyboardEvent<HTMLInputElement>){
+    function handleKeydown(event: React.KeyboardEvent<HTMLInputElement>){
         if (event.key === "Enter"){
+            trigger();
+        }
+    }
+
+    function handleClick(event: React.MouseEvent<HTMLDivElement>){
+        if (!disabled){
             trigger();
         }
     }
@@ -52,11 +59,17 @@ export default function SearchBar({output, feedback, trigger}: BarProps){
                         placeholder="Digite o Pokémon"
                         value={inputText}
                         onChange={(e) => setInputText(e.currentTarget.value)} 
-                        onKeyDown={handleTrigger}
+                        onKeyDown={handleKeydown}
                     />
                 </div>
-                <span className={styles.send} onClick={() => trigger()}>
-                    <img src="/images/others/pokeball.png" alt="pokeball icon"/>
+                <span className={styles.send} onClick={handleClick}>
+                    {
+                        disabled ? (
+                            <img src="/images/others/pokeball_disabled.png" alt="pokeball icon"/>
+                        ) : (
+                            <img src="/images/others/pokeball.png" alt="pokeball icon"/>
+                        )
+                    }
                 </span>
             </div>
             <div className={outlineClasses}></div>
